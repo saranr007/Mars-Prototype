@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 128008466}
   m_Layer: 0
   m_Name: line
-  m_TagString: Untagged
+  m_TagString: UpperBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 128008464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -18.524895, y: 0.28778458, z: 6.0255556}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 9.525, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 988452349}
   m_RootOrder: 0
@@ -165,7 +165,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -398,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 7.5, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -634,6 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrsutForce: 2
+  direction: 0
 --- !u!50 &823224410
 Rigidbody2D:
   serializedVersion: 4
@@ -749,6 +750,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 127
   Thrust_Instantiate: {fileID: 186947223}
+  NeedToThrow: 0
 --- !u!114 &823224414
 MonoBehaviour:
   m_ObjectHideFlags: 0
