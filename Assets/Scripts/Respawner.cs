@@ -48,12 +48,15 @@ public class Respawner : MonoBehaviour
                 }
                 else
                 {
+                    Thruster_RB.velocity = Vector2.zero;
+                    Thruster_RB.angularVelocity = 0;
                     transform.position = ThrusterCurrentPos;
                 }
-            } else if (Box.collider.CompareTag("Ground"))
+            } else if (Box.collider.CompareTag("Ground")||Box.collider.CompareTag("Obstacle"))
             {
+                Thruster_RB.velocity = Vector2.zero;
+                Thruster_RB.angularVelocity = 0;
                 transform.position = ThrusterCurrentPos;
-                lifter.direction = 0;
             }
          }
         if(NeedToThrow)

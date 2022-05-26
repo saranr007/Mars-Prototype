@@ -45,3 +45,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2353054501
+    locked: 0
+  - name: Background Objects
+    uniqueID: 727930265
+    locked: 0
+  - name: Obstacle and Landers
+    uniqueID: 2277741209
+    locked: 0
+  - name: Ground
+    uniqueID: 2708120811
+    locked: 0
+  - name: 
+    uniqueID: 276646801
+    locked: 0

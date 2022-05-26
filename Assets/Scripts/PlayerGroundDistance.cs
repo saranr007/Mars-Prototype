@@ -28,22 +28,18 @@ public class PlayerGroundDistance : MonoBehaviour
         if (hit.collider != null)
         {
             EndPosition = hit.point;
-            Debug.Log(hit.collider.name);
-            Debug.DrawRay(transform.position, Vector2.down * TargetDistance);
+            
         }
         else
         {
             EndPosition = transform.position + (Vector3.down * TargetDistance);
         }
-        Debug.LogWarning("TargetDistance"+ TargetDistance);
+      
     }
     public RaycastHit2D CreateRay(float maxd)
     {
         RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, maxd, RayMask);
         return ray;
     }
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(transform.position, Vector2.down*35f);
-    }
+    
 }

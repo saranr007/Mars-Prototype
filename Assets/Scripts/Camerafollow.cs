@@ -42,7 +42,6 @@ public class Camerafollow : MonoBehaviour
         var Bounds = new Bounds();
         Bounds.Encapsulate(thrusterdistance.EndPosition);
         Bounds.Encapsulate(thrusterdistance.player.position);
-        Debug.Log("Bounds distance"+Bounds.size.y);
         return Bounds.center;
         
     }
