@@ -12,6 +12,7 @@ public class LiftThrusters : MonoBehaviour
     Respawner respawner;
     public Button LeftButton;
     bool both=false;
+    public float fuelRate;
 
     // Start is called before the first frame update
     void Start()
@@ -26,32 +27,30 @@ public class LiftThrusters : MonoBehaviour
         //  var val = Mathf.Clamp()
         if (!respawner.NeedToThrow)
         {
-            if (Input.GetKey(KeyCode.Z)&&!both)
+            if (Input.GetKey(KeyCode.A))
             {
                 Thruster_RigidBody.velocity = new Vector2(3, 4f) * thrsutForce;
-                if(Input.GetKeyDown(KeyCode.X))
-                {
-                    both = true;
-                }
-
             }
-            else if (Input.GetKey(KeyCode.X)&&!both)
+            else if (Input.GetKey(KeyCode.S))
             {
                 Thruster_RigidBody.velocity = new Vector2(-3, 4f) * thrsutForce;
-                if(Input.GetKeyDown(KeyCode.Z))
-                {
-                    both = true;
-                }
+                
+
             }
             else if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.X))
             {
                 Thruster_RigidBody.velocity = new Vector2(1f, 3f) * 1.2f;
+                
             }
             else
             {
                 both = false;
             }
+            
+            
+
         }
+
         //Debug.Log("Magnitude"+GetComponent<Rigidbody2D>().velocity.magnitude);
     }
    

@@ -7,39 +7,41 @@ public class PlayerGroundDistance : MonoBehaviour
     public LayerMask RayMask;
     public float MaxDistance;
     public Vector3 EndPosition;
-    public static PlayerGroundDistance playerGroundDistance;
-    public Transform player;
+    BoxCollider2D col;
+    public static PlayerGroundDistance Instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        col = GetComponent<BoxCollider2D>();
     }
     private void Awake()
     {
-        player = gameObject.transform;
-        playerGroundDistance = this;
+        Instance = this;
     }
-
     // Update is called once per frame
     private void Update()
     {
         float TargetDistance = MaxDistance;
         RaycastHit2D hit = CreateRay(TargetDistance);
+        
         if (hit.collider != null)
         {
-            EndPosition = hit.point;
-            
+            Debug.Log("Collider Name" + hit.collider.name);
+            EndPosition = hit.point;  
         }
         else
         {
-            EndPosition = transform.position + (Vector3.down * TargetDistance);
+            EndPosition = Vector3.down * TargetDistance;
         }
+        
       
     }
-    public RaycastHit2D CreateRay(float maxd)
+    public RaycastHit2D CreateRay(float MaxDis)
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, maxd, RayMask);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, -Vector2.up, MaxDis, RayMask);
         return ray;
     }
-    
+   
+
+
 }
