@@ -82,4 +82,11 @@ public class MenuControls : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    private void OnEnable()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
+        }
+    }
 }

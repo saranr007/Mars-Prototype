@@ -12,6 +12,7 @@ TagManager:
   - Coin
   - Platform
   - LanderParent
+  - Crystal
   layers:
   - Default
   - TransparentFX
