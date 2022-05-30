@@ -7367,7 +7367,7 @@ GameObject:
   - component: {fileID: 5044345181160356918}
   - component: {fileID: 5044345181160356917}
   m_Layer: 3
-  m_Name: kisspng-stone-wall-stone-walls-5a9af2610cac26.2937434115201040330519
+  m_Name: Ground 1
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

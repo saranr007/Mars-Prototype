@@ -33,7 +33,6 @@ public class FuelManager : MonoBehaviour
         }
         if (FuelRate<=0)
         {
-            Debug.Log("Calleddddd");
             Respawner.respawner.BackToPosition();
             FuelRate = DefaulFuelRate;
         }

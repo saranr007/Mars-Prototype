@@ -9,6 +9,8 @@ public class PlayerGroundDistance : MonoBehaviour
     public Vector3 EndPosition;
     BoxCollider2D col;
     public static PlayerGroundDistance Instance;
+    [HideInInspector]
+    public Transform CurrenGround { private set; get; }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class PlayerGroundDistance : MonoBehaviour
         
         if (hit.collider != null)
         {
-            Debug.Log("Collider Name" + hit.collider.name);
+            CurrenGround = hit.collider.transform;
             EndPosition = hit.point;  
         }
         else

@@ -24,7 +24,6 @@ public class CoinCollector : MonoBehaviour
         if(Coin.tag=="Coin")
         {
             score += 1;
-            Debug.Log("Score" + score);
             Destroy(Coin);
             ScoreText.text = "SCORE " + score;
         }

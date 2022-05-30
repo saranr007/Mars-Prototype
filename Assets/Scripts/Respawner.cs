@@ -17,12 +17,15 @@ public class Respawner : MonoBehaviour
     bool FirstLifting, firstExecution;
     public static Respawner respawner;
     public FuelManager fuelManager;
+    public TouchEvent Touch;
+   
+
 
     // Start is called before the first frame update
     void Start()
     {
         Thruster = this.gameObject;
-        ThrusterStartPos = Thruster.transform.position;
+        ThrusterStartPos = transform.position;
         Thruster_RB = GetComponent<Rigidbody2D>();
         ThrusterCurrentPos = ThrusterStartPos;
         ThrustCollider = Thruster.GetComponent<BoxCollider2D>();
@@ -37,7 +40,8 @@ public class Respawner : MonoBehaviour
     private void Update()
     {
        RaycastHit2D Box = Physics2D.BoxCast(ThrustCollider.bounds.center, ThrustCollider.bounds.size, 0, -Vector2.up, raysdistance,ColliderMask);
-        RespawnObject(Box);
+       
+       RespawnObject(Box);
         Debug.DrawRay(ThrustCollider.bounds.center, -Vector2.up * (ThrustCollider.bounds.size.y + raysdistance));
 
         if (NeedToThrow)
@@ -55,39 +59,33 @@ public class Respawner : MonoBehaviour
         {
             NeedToThrow = true;
         } 
-        if(collision.CompareTag("Ground")||collision.CompareTag("Obstacle"))
-        {
-
-        }
+        
     }
     public void BackToPosition()
     {
+        Touch.LeftThrusterParticle.Stop();
+        Touch.RightThrusterParticle.Stop();
         Thruster_RB.velocity = Vector2.zero;
         Thruster_RB.angularVelocity = 0;
         transform.position = ThrusterCurrentPos;
-        Debug.Log("Moved Out");
     }
     void RespawnObject(RaycastHit2D Box)
     {
         if (Box.collider != null)
         {
-            Vector2 r = Thruster_RB.GetPointVelocity(transform.TransformPoint(Box.point));
             if (Box.collider.CompareTag("Lander"))
-            { 
+            {
+                Vector2 r = Thruster_RB.GetPointVelocity(transform.TransformPoint(Box.point));
                 if (r.magnitude < 9f)
                 {
- 
                     ThrusterCurrentPos = transform.position;
                     fuelManager.AddFuel();
                 }
                 if(r.magnitude>9f)
                 {
-                    Debug.LogError(r.magnitude);
-                }
-                else
-                {
                     BackToPosition();
                 }
+                
             }
             else if (Box.collider.CompareTag("Ground") || Box.collider.CompareTag("Obstacle"))
             {

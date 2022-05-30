@@ -17,7 +17,9 @@ public class TouchEvent : MonoBehaviour
     bool bothButtonsClicked = false;
     private float FuelRate=7;
     [HideInInspector]public bool IsMoving=false;
-
+    public ParticleSystem LeftThrusterParticle;
+    public ParticleSystem RightThrusterParticle;
+    public MenuControls Menu;
     void Start()
     {
         respawner = ThrusterObject.GetComponent<Respawner>();
@@ -26,8 +28,12 @@ public class TouchEvent : MonoBehaviour
     }
     void Update()
     {
-        MoveThruster();
-        CheckForMovement();
+        if (!Menu.isPaused)
+        {
+            MoveThruster();
+            CheckForMovement();
+        }
+        
     }
    
     private void CheckForMovement()
@@ -43,25 +49,30 @@ public class TouchEvent : MonoBehaviour
     }
     private void MoveThruster()
     {
-        if (RightDown)
-        {
-            Thruster_RigidBody.velocity = new Vector2(3, 4f) * thrsutForce;
-        }
         if (LeftDown)
         {
+            Thruster_RigidBody.velocity = new Vector2(3, 4f) * thrsutForce;
+            
+            LeftThrusterParticle.Play();
+        }
+        else if (RightDown)
+        {
             Thruster_RigidBody.velocity = new Vector2(-3, 4f) * thrsutForce;
+            RightThrusterParticle.Play();
         }
         if (bothButtonsClicked)
         {
             Thruster_RigidBody.velocity = new Vector2(1f, 3f) * 0.5f;
+            LeftThrusterParticle.Play();
+            RightThrusterParticle.Play();
         }
+        
         if (Input.touchCount >= 2)
         {
             Vector2 TouchPLeft = Input.GetTouch(0).position;
             Vector2 TouchPRight = Input.GetTouch(1).position;
-            Debug.Log(Input.touchCount);
-            if ((TouchPLeft.x < Screen.width / 2.2f || TouchPRight.x < Screen.width / 2.2f)
-                && (TouchPRight.x > Screen.width / 2.2f || TouchPLeft.x > Screen.width / 2.2f))
+            if ((TouchPLeft.x < Screen.width / 2f || TouchPRight.x < Screen.width / 2f)
+                && (TouchPRight.x > Screen.width / 2f || TouchPLeft.x > Screen.width / 2f))
             {
                 bothButtonsClicked = true;
             }
@@ -96,6 +107,12 @@ public class TouchEvent : MonoBehaviour
         {
             RightDown = false;
         }
+    }
+    IEnumerator StoppingParticle(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        LeftThrusterParticle.Stop();
+        RightThrusterParticle.Stop();
     }
     
     

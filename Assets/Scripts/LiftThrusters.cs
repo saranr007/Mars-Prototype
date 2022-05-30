@@ -34,24 +34,22 @@ public class LiftThrusters : MonoBehaviour
             else if (Input.GetKey(KeyCode.S))
             {
                 Thruster_RigidBody.velocity = new Vector2(-3, 4f) * thrsutForce;
-                
+
 
             }
             else if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.X))
             {
                 Thruster_RigidBody.velocity = new Vector2(1f, 3f) * 1.2f;
-                
+
             }
             else
             {
                 both = false;
             }
-            
-            
+
+
 
         }
-
-        //Debug.Log("Magnitude"+GetComponent<Rigidbody2D>().velocity.magnitude);
     }
    
     }

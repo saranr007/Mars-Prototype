@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlatformGenerators : MonoBehaviour
 {
     [SerializeField] private Transform StartLevel;
-    [SerializeField] private Transform StartLevel_2;
+    [SerializeField] public List<Transform> Levels;
     public LanderNumbers landerNumbers;
+    private const float DistanceBetweenPlayerAndLastPoint = 200f;
+    private Vector3 LastPosition;
+    public Transform Thruster;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +19,30 @@ public class PlatformGenerators : MonoBehaviour
     {
         Transform lastLevel;
         landerNumbers.CreateNumbers(StartLevel);
-        lastLevel = SpawnNewPlatform(StartLevel.Find("EndingPoint").position);
-        lastLevel = SpawnNewPlatform(lastLevel.Find("EndingPoint").position);
-        lastLevel = SpawnNewPlatform(lastLevel.Find("EndingPoint").position);
-        lastLevel = SpawnNewPlatform(lastLevel.Find("EndingPoint").position);
-        
+        LastPosition = StartLevel.Find("EndingPoint").position;
+        int StartSpawnNumbers = 4;
+            for(int i=0;i<StartSpawnNumbers;i++)
+        {
+            SpawnLevel();
+        }
     }
-    public Transform SpawnNewPlatform(Vector3 StartingPoint)
+    private void Update()
     {
-        Transform NewLevel = Instantiate(StartLevel_2, StartingPoint, Quaternion.identity);
+        float distance = Vector3.Distance(Thruster.position, LastPosition);
+        if(distance<DistanceBetweenPlayerAndLastPoint)
+        {
+            SpawnLevel();
+        }
+    }
+    void SpawnLevel()
+    {
+        Transform NewRandomPlatform = Levels[Random.Range(0, Levels.Count)];
+        Transform LastLevel = SpawnNewPlatform(LastPosition,NewRandomPlatform);
+        LastPosition = LastLevel.Find("EndingPoint").position;
+    }
+    public Transform SpawnNewPlatform(Vector3 StartingPoint,Transform NewPlatform)
+    {
+        Transform NewLevel = Instantiate(NewPlatform, StartingPoint, Quaternion.identity);
         landerNumbers.CreateNumbers(NewLevel);
         return NewLevel;
     }
